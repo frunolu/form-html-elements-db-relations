@@ -1,0 +1,43 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+latte:
+	strictTypes: yes
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+
+console:
+	name: music project
+	version: '1.0'
+	catchExceptions: true
+	autoExit: true
+	url: http://localhost:90/
+	lazy: false
+
+database:
+	dsn: ''
+	user: ''
+	password: ''
+
+migrations:
+	dir: %appDir%/../migrations
+	driver: mysql
+	dbal: nette

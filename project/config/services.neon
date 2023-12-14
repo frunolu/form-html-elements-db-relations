@@ -1,0 +1,10 @@
+search:
+	default:
+		in: %appDir%
+		classes:
+			- *Factory
+
+
+services:
+	- App\Router\RouterFactory::createRouter
+	- App\Builders\FormBuilder
