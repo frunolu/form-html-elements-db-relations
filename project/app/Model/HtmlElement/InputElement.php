@@ -11,6 +11,15 @@ class InputElement extends HtmlElement
         parent::__construct(self::TAG_NAME);
     }
 
+    /**
+     * Builds an instance of InputElement with the specified type, name, and placeholder.
+     *
+     * @param string $type The type attribute of the input element.
+     * @param string $name The name attribute of the input element.
+     * @param string $placeholder The placeholder attribute of the input element.
+     *
+     * @return InputElement The newly created InputElement instance with the specified attributes.
+     */
     public function buildInputElement(string $type, string $name, string $placeholder): InputElement
     {
         return (new InputElement())

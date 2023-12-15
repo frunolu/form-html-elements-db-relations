@@ -2,8 +2,18 @@
 
 namespace App\Model\HtmlElement;
 
+/**
+ * Class FormElement
+ *
+ * Represents an HTML form element.
+ *
+ * @extends HtmlElement
+ */
 class FormElement extends HtmlElement
 {
+    /**
+     * @var array $children Holds an array of children elements.
+     */
     protected array $children = [];
 
     public function __construct()
@@ -11,6 +21,12 @@ class FormElement extends HtmlElement
         parent::__construct('form');
     }
 
+    /**
+     * Adds an input element to the list of children.
+     *
+     * @param InputElement $input The input element to be added.
+     * @return $this Returns the instance of the current class.
+     */
     public function addInput(InputElement $input): static
     {
         $this->children[] = $input;
@@ -18,6 +34,12 @@ class FormElement extends HtmlElement
         return $this;
     }
 
+    /**
+     * Adds a select element to the list of children.
+     *
+     * @param SelectElement $select The select element to be added.
+     * @return $this Returns the instance of the current class.
+     */
     public function addSelect(SelectElement $select): static
     {
         $this->children[] = $select;
@@ -25,6 +47,12 @@ class FormElement extends HtmlElement
         return $this;
     }
 
+    /**
+     * Adds an image element to the list of children.
+     *
+     * @param ImageElement $image The image element to be added.
+     * @return $this Returns the instance of the current class.
+     */
     public function addImage(ImageElement $image): static
     {
         $this->children[] = $image;
@@ -32,6 +60,11 @@ class FormElement extends HtmlElement
         return $this;
     }
 
+    /**
+     * Renders the HTML representation of the element.
+     *
+     * @return string Returns the rendered HTML string.
+     */
     public function render(): string
     {
         $attributesString = $this->renderAttributes();
@@ -40,6 +73,11 @@ class FormElement extends HtmlElement
         return "<{$this->tagName}{$attributesString}>{$childrenString}</{$this->tagName}>";
     }
 
+    /**
+     * Renders the children elements as a string.
+     *
+     * @return string Returns the string representation of the children elements.
+     */
     protected function renderChildren(): string
     {
         $childrenString = '';
@@ -50,6 +88,12 @@ class FormElement extends HtmlElement
         return $childrenString;
     }
 
+    /**
+     * Adds an HTML form item element to the list of children.
+     *
+     * @param HtmlElement $formItem The HTML form item element to be added.
+     * @return $this Returns the instance of the current class.
+     */
     public function addFormItem(HtmlElement $formItem): static
     {
         $this->children[] = $formItem;
@@ -57,6 +101,12 @@ class FormElement extends HtmlElement
         return $this;
     }
 
+    /**
+     * Sets the action attribute of the element.
+     *
+     * @param string $link The URL or URI to which the form data will be submitted.
+     * @return $this Returns the instance of the current class.
+     */
     public function setAction(string $link): static
     {
         $this->setAttribute('action', $link);

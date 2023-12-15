@@ -36,22 +36,40 @@ class HtmlElement {
         return $this;
     }
 
+
     public function getTagName(): string
     {
         return $this->tagName;
     }
 
+    /**
+     * Sets the value of the specified attribute.
+     *
+     * @param string $attributeName The name of the attribute.
+     * @param mixed $attributeValue The value of the attribute.
+     * @return $this The current instance.
+     */
     public function setAttribute(string $attributeName, $attributeValue): static
     {
         $this->attributes[$attributeName] = $attributeValue;
         return $this;
     }
 
+    /**
+     * Retrieves the attributes of the object.
+     *
+     * @return array The attributes of the object.
+     */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
 
+    /**
+     * Renders the HTML element as a string.
+     *
+     * @return string The HTML representation of the element.
+     */
     public function render(): string
     {
         $attributesString = $this->renderAttributes();

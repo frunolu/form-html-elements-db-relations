@@ -10,9 +10,15 @@ use App\Model\HtmlElement\InputElement;
 use App\Model\HtmlElement\SelectElement;
 use Exception;
 
+/**
+ * Class FormBuilder
+ *
+ * This class provides methods for building form elements and rendering the form.
+ */
 class FormBuilder
 {
     /**
+     * @return FormElement
      * @throws Exception
      */
     public function buildForm(): FormElement
@@ -24,6 +30,8 @@ class FormBuilder
     }
 
     /**
+     * @param FormElement $form
+     * @return FormElement
      * @throws Exception
      */
     private function addFormItems(FormElement $form): FormElement
@@ -44,32 +52,56 @@ class FormBuilder
         return $form;
     }
 
+    /**
+     * @return FormElement
+     */
     private function createView(): FormElement
     {
-        return (new FormElement())->setAttribute('action', '/home')->setAttribute('method', 'post');
+        return (new FormElement())->setAction('/home')->setAttribute('method', 'post');
     }
 
+    /**
+     * @param string $type
+     * @param string $name
+     * @param string $placeholder
+     * @return InputElement
+     */
     private function createInputElement(string $type, string $name, string $placeholder): InputElement
     {
         return (new InputElement())->buildInputElement($type, $name, $placeholder);
     }
 
+    /**
+     * @param string $name
+     * @param array $options
+     * @return SelectElement
+     */
     private function createSelectElement(string $name, array $options): SelectElement
     {
         return (new SelectElement())->buildSelectElement($name, $options);
     }
 
+    /**
+     * @return DivElement
+     */
     private function createDivElement(): DivElement
     {
         return new DivElement();
     }
 
+    /**
+     * @param string $href
+     * @param string $text
+     * @return AElement
+     */
     private function createAElement(string $href, string $text): AElement
     {
         return (new AElement())->buildAElement($href, $text);
     }
 
     /**
+     * @param string $src
+     * @return ImageElement
      * @throws Exception
      */
     private function createImageElement(string $src): ImageElement
