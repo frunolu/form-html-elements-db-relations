@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model\HtmlElement;
 
 class ImageElement extends HtmlElement
@@ -28,5 +30,4 @@ class ImageElement extends HtmlElement
     {
         return $this->attributes['src'] ?? '';
     }
-
 }

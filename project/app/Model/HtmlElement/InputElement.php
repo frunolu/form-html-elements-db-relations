@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model\HtmlElement;
 
 class InputElement extends HtmlElement
@@ -20,13 +22,11 @@ class InputElement extends HtmlElement
      *
      * @return InputElement The newly created InputElement instance with the specified attributes.
      */
-    public function buildInputElement(string $type, string $name, string $placeholder): InputElement
+    public function buildInputElement(string $type, string $name, string $placeholder): self
     {
-        return (new InputElement())
+        return (new self())
             ->setAttribute('type', $type)
             ->setAttribute('name', $name)
             ->setAttribute('placeholder', $placeholder);
     }
-
-
 }

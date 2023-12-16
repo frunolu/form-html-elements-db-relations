@@ -1,14 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\HtmlElement;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="html_elements")
  */
-class HtmlElement {
-
+class HtmlElement
+{
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -26,16 +29,16 @@ class HtmlElement {
      */
     protected array $attributes = [];
 
-    public function __construct($tagName) {
+    public function __construct(string $tagName)
+    {
         $this->tagName = $tagName;
     }
 
-    public function setTagName($tagName): static
+    public function setTagName(string $tagName): self
     {
         $this->tagName = $tagName;
         return $this;
     }
-
 
     public function getTagName(): string
     {
@@ -49,9 +52,10 @@ class HtmlElement {
      * @param mixed $attributeValue The value of the attribute.
      * @return HtmlElement The current instance.
      */
-    public function setAttribute(string $attributeName, mixed $attributeValue): static
+    public function setAttribute(string $attributeName, mixed $attributeValue): self
     {
         $this->attributes[$attributeName] = $attributeValue;
+        return $this;
     }
 
     /**
@@ -81,7 +85,6 @@ class HtmlElement {
         foreach ($this->attributes as $name => $value) {
             $attributesString .= " $name=\"$value\"";
         }
-
         return $attributesString;
     }
 }
