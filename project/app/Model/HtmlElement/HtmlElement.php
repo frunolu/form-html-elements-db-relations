@@ -47,12 +47,11 @@ class HtmlElement {
      *
      * @param string $attributeName The name of the attribute.
      * @param mixed $attributeValue The value of the attribute.
-     * @return $this The current instance.
+     * @return HtmlElement The current instance.
      */
-    public function setAttribute(string $attributeName, $attributeValue): static
+    public function setAttribute(string $attributeName, mixed $attributeValue): static
     {
         $this->attributes[$attributeName] = $attributeValue;
-        return $this;
     }
 
     /**

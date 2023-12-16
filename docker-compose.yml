@@ -28,7 +28,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8080:8080"
+      - "8082:8080"
     links:
       - db:db
     environment:
@@ -45,4 +45,4 @@ services:
       - ./project:/project
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - '90:80'
+      - '91:80'
