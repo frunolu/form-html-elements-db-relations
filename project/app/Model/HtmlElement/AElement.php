@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model\HtmlElement;
 
 /**
@@ -9,45 +11,53 @@ namespace App\Model\HtmlElement;
  */
 class AElement extends HtmlElement
 {
-private string $innerText;
+    /**
+     * @var string
+     */
+    private string $innerText;
 
-public function __construct()
-{
-parent::__construct('a');
-}
+    /**
+     * AElement constructor
+     */
+    public function __construct()
+    {
+        parent::__construct('a');
+    }
 
-/**
- * @param string $string
- * @return void
- */
-public function setInnerText(string $string): void
-{
-$this->innerText = $string;
-}
+    /**
+     * @param string $string
+     * @return void
+     */
+    public function setInnerText(string $string): void
+    {
+        $this->innerText = $string;
+    }
 
-/**
- * Constructs a new AElement object with the given href and text.
- *
- * @param string $href The href attribute value for the AElement.
- * @param string $text The inner text content for the AElement.
- * @return AElement The newly constructed AElement object.
- */
-public function buildAElement(string $href, string $text): AElement
-{
-    $element = new AElement();
-    $element->setAttribute('href', $href);
-    $element->setInnerText($text);
-    return $element;
-}
+    /**
+     * Constructs a new AElement object with the given href and text.
+     *
+     * @param string $href The href attribute value for the AElement.
+     * @param string $text The inner text content for the AElement.
+     * @return AElement The newly constructed AElement object.
+     */
+    public function buildAElement(string $href, string $text): AElement
+    {
+        $element = new self();
+        $element->setAttribute('href', $href);
+        $element->setInnerText($text);
+
+        return $element;
+    }
 
     /**
      * Renders the element as an HTML string.
      *
      * @return string The rendered HTML string.
      */
-public function render(): string
-{
-$attributesString = $this->renderAttributes();
-return "<{$this->tagName}{$attributesString}>{$this->innerText}</{$this->tagName}>";
-}
+    public function render(): string
+    {
+        $attributesString = $this->renderAttributes();
+
+        return "<{$this->tagName}{$attributesString}>{$this->innerText}</{$this->tagName}>";
+    }
 }

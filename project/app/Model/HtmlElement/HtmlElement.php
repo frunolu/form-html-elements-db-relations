@@ -82,6 +82,7 @@ class HtmlElement {
         foreach ($this->attributes as $name => $value) {
             $attributesString .= " $name=\"$value\"";
         }
+
         return $attributesString;
     }
 }
