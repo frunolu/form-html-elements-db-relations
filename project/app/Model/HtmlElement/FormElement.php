@@ -24,7 +24,7 @@ class FormElement extends HtmlElement
     /**
      * Adds an input element to the list of children.
      *
-     * @param InputElement $input The input element to be added.
+     * @param  InputElement $input The input element to be added.
      * @return $this Returns the instance of the current class.
      */
     public function addInput(InputElement $input): static
@@ -37,7 +37,7 @@ class FormElement extends HtmlElement
     /**
      * Adds a select element to the list of children.
      *
-     * @param SelectElement $select The select element to be added.
+     * @param  SelectElement $select The select element to be added.
      * @return $this Returns the instance of the current class.
      */
     public function addSelect(SelectElement $select): static
@@ -50,7 +50,7 @@ class FormElement extends HtmlElement
     /**
      * Adds an image element to the list of children.
      *
-     * @param ImageElement $image The image element to be added.
+     * @param  ImageElement $image The image element to be added.
      * @return $this Returns the instance of the current class.
      */
     public function addImage(ImageElement $image): static
@@ -91,7 +91,7 @@ class FormElement extends HtmlElement
     /**
      * Adds an HTML form item element to the list of children.
      *
-     * @param HtmlElement $formItem The HTML form item element to be added.
+     * @param  HtmlElement $formItem The HTML form item element to be added.
      * @return $this Returns the instance of the current class.
      */
     public function addFormItem(HtmlElement $formItem): static
@@ -104,7 +104,7 @@ class FormElement extends HtmlElement
     /**
      * Sets the action attribute of the element.
      *
-     * @param string $link The URL or URI to which the form data will be submitted.
+     * @param  string $link The URL or URI to which the form data will be submitted.
      * @return $this Returns the instance of the current class.
      */
     public function setAction(string $link): static

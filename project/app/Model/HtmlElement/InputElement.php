@@ -16,8 +16,8 @@ class InputElement extends HtmlElement
     /**
      * Builds an instance of InputElement with the specified type, name, and placeholder.
      *
-     * @param string $type The type attribute of the input element.
-     * @param string $name The name attribute of the input element.
+     * @param string $type        The type attribute of the input element.
+     * @param string $name        The name attribute of the input element.
      * @param string $placeholder The placeholder attribute of the input element.
      *
      * @return InputElement The newly created InputElement instance with the specified attributes.

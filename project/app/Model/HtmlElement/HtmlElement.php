@@ -48,8 +48,8 @@ class HtmlElement
     /**
      * Sets the value of the specified attribute.
      *
-     * @param string $attributeName The name of the attribute.
-     * @param mixed $attributeValue The value of the attribute.
+     * @param  string $attributeName  The name of the attribute.
+     * @param  mixed  $attributeValue The value of the attribute.
      * @return HtmlElement The current instance.
      */
     public function setAttribute(string $attributeName, mixed $attributeValue): self

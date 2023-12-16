@@ -12,7 +12,7 @@ class ImageElement extends HtmlElement
     }
 
     /**
-     * @param string $src
+     * @param  string $src
      * @return $this
      */
     public function setSrc(string $src): static

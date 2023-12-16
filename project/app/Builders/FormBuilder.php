@@ -30,7 +30,7 @@ class FormBuilder
     }
 
     /**
-     * @param FormElement $form
+     * @param  FormElement $form
      * @return FormElement
      * @throws Exception
      */
@@ -61,9 +61,9 @@ class FormBuilder
     }
 
     /**
-     * @param string $type
-     * @param string $name
-     * @param string $placeholder
+     * @param  string $type
+     * @param  string $name
+     * @param  string $placeholder
      * @return InputElement
      */
     private function createInputElement(string $type, string $name, string $placeholder): InputElement
@@ -72,8 +72,8 @@ class FormBuilder
     }
 
     /**
-     * @param string $name
-     * @param array $options
+     * @param  string $name
+     * @param  array  $options
      * @return SelectElement
      */
     private function createSelectElement(string $name, array $options): SelectElement
@@ -90,8 +90,8 @@ class FormBuilder
     }
 
     /**
-     * @param string $href
-     * @param string $text
+     * @param  string $href
+     * @param  string $text
      * @return AElement
      */
     private function createAElement(string $href, string $text): AElement
@@ -100,7 +100,7 @@ class FormBuilder
     }
 
     /**
-     * @param string $src
+     * @param  string $src
      * @return ImageElement
      * @throws Exception
      */

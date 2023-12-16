@@ -57,7 +57,6 @@ class HomePresenter extends Nette\Application\UI\Presenter
 
     /**
      * Renders the default view of the presenter.
-     *
      */
     public function renderDefault(): void
     {

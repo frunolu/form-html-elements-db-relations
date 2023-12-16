@@ -25,7 +25,7 @@ class AElement extends HtmlElement
     }
 
     /**
-     * @param string $string
+     * @param  string $string
      * @return void
      */
     public function setInnerText(string $string): void
@@ -36,8 +36,8 @@ class AElement extends HtmlElement
     /**
      * Constructs a new AElement object with the given href and text.
      *
-     * @param string $href The href attribute value for the AElement.
-     * @param string $text The inner text content for the AElement.
+     * @param  string $href The href attribute value for the AElement.
+     * @param  string $text The inner text content for the AElement.
      * @return AElement The newly constructed AElement object.
      */
     public function buildAElement(string $href, string $text): AElement
