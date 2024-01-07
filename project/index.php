@@ -1,54 +1,25 @@
 <?php
 
 declare(strict_types=1);
-
 require_once 'App/HtmlElement/HtmlElement.php';
 require_once 'App/HtmlElement/FormElement.php';
-echo "hello";
 
 use App\HtmlElement\FormElement;
 
-/**
- * Create a text field with default value
- */
-echo (new App\HtmlElement\FormElement)->text('Some text');
+$element = new FormElement();
 
-/**
- * Create a text field with default value, name, id and class attributes
- */
-echo (new App\HtmlElement\FormElement)->text('Some text', ['name' => 'Name', 'id' => 'ID', 'class' => 'Class']);
+echo "hello";
 
-/**
- * Create an email input field
- */
-echo (new App\HtmlElement\FormElement)->input('email', 'noreply@gmail.com');
+echo $element->text('music');
 
-/**
- * Create a checkbox with default checked and with name and id attributes
- */
-echo (new App\HtmlElement\FormElement)->checkbox(true, ['name' => 'Name', 'id' => 'ID']);
+echo $element->text('music', ['name' => 'Name', 'id' => 'ID', 'class' => 'Class']);
 
-/**
- * Create a list of checkboxes with default values
- */
-echo (new App\HtmlElement\FormElement)->checkboxList(['cat'], ['name' => 'Name', 'id' => 'ID'], ['dog' => 'Dog', 'cat' => 'Cat']);
+echo $element->input('email', 'music@gmail.com');
 
-/**
- * Create a select with default value, name and id attributes
- */
-echo (new App\HtmlElement\FormElement)->select(['cat'], ['name' => 'Name', 'id' => 'ID'], ['dog' => 'Dog', 'cat' => 'Cat']);
+echo $element->checkbox(true, ['name' => 'Name', 'id' => 'ID']);
 
-/**
- * Alies select
- */
-echo (new App\HtmlElement\FormElement)->select(['cat'], ['name' => 'Name', 'id' => 'ID'], ['dog' => 'Dog', 'cat' => 'Cat']);
+echo $element->checkboxList(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
 
-/**
- * Create a list of radio
- */
-echo (new App\HtmlElement\FormElement)->radio(['cat'], ['name' => 'Name', 'id' => 'ID'], ['dog' => 'Dog', 'cat' => 'Cat']);
+echo $element->select(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
 
-/**
- * Create a lebel with label text, id, class and for attributes
- */
-echo FormElement::label('Some text', ['id' => 'ID', 'class' => 'Class', 'for' => 'for']);
+echo $element->radio(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
