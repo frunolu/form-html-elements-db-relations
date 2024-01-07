@@ -1,4 +1,5 @@
 <?php
+
 namespace App\HtmlElement;
 
 use Exception;
@@ -264,14 +265,16 @@ class HtmlElement
      */
     public function optionAttributes(array $option): string
     {
-        ++ $this->optionCount;
+        ++$this->optionCount;
 
         $attributes = [];
 
-        if (! in_array($this->type, [
+        if (
+            ! in_array($this->type, [
             'select',
             'multiselect',
-        ])) {
+            ])
+        ) {
             $attributes = $this->getRefinedAttributes();
         }
 
@@ -312,10 +315,12 @@ class HtmlElement
                 // $attributes[$key] = "{$val}[]";
             }
 
-            if (in_array($this->type, [
+            if (
+                in_array($this->type, [
                     'radio',
                     'checkboxList',
-                ]) && $key == 'id' && $val) {
+                ]) && $key == 'id' && $val
+            ) {
                 $attributes[$key] = "{$val}_{$this->optionCount}";
             }
         }
@@ -825,13 +830,15 @@ class HtmlElement
     private function refinePublish($element)
     {
         $html = '';
-        if (! empty($this->attributes[$this->config['BEFORE']]))
+        if (! empty($this->attributes[$this->config['BEFORE']])) {
             $html .= $this->attributes[$this->config['BEFORE']];
+        }
 
         $html .= $element;
 
-        if (! empty($this->attributes[$this->config['AFTER']]))
+        if (! empty($this->attributes[$this->config['AFTER']])) {
             $html .= $this->attributes[$this->config['AFTER']];
+        }
 
         if (! empty($this->attributes[$this->config['ENCLOSE']])) {
             list ($type, $attr) = $this->_splitFirstFromArray($this->attributes[$this->config['ENCLOSE']]);
@@ -853,10 +860,12 @@ class HtmlElement
         if (isset($this->attributes['label'])) {
             list ($default, $attr) = $this->_splitFirstFromArray($this->attributes[$this->config['LABEL']]);
 
-            if (isset($this->attributes['id']) && ! in_array($this->type, [
+            if (
+                isset($this->attributes['id']) && ! in_array($this->type, [
                     'radio',
                     'checkboxList',
-                ])) {
+                ])
+            ) {
                 $attr['for'] = $this->attributes['id'];
             }
 
@@ -1096,9 +1105,9 @@ class HtmlElement
     }
 
 
-        public function setAttribute(string $string, string $name)
-{
-}
+    public function setAttribute(string $string, string $name)
+    {
+    }
 
 
     /**
@@ -1146,10 +1155,12 @@ class HtmlElement
      */
     private function isString($data)
     {
-        if (in_array(gettype($data), [
+        if (
+            in_array(gettype($data), [
             'array',
             'object',
-        ])) {
+            ])
+        ) {
             return false;
         }
 
@@ -1260,4 +1271,3 @@ class HtmlElement
         'DISABLE_ESCAPE' => '_disable_escape',
     ];
 }
-

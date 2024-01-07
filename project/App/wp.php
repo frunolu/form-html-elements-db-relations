@@ -1,6 +1,6 @@
 <?php
 
-if (defined('ABSPATH') && file_exists( ABSPATH . 'wp-load.php' )) {
+if (defined('ABSPATH') && file_exists(ABSPATH . 'wp-load.php')) {
     return;
 }
 

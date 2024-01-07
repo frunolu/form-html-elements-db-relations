@@ -75,6 +75,4 @@ class InputElement extends FormElement
             '_escape_function' => 'esc_url',
         ],
     ];
-
 }
-

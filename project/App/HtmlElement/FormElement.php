@@ -17,7 +17,6 @@ use Exception;
  */
 class FormElement extends HtmlElement
 {
-
     public function __construct()
     {
         parent::__construct('form');
@@ -65,6 +64,4 @@ class FormElement extends HtmlElement
     {
         return "<option value=\"{$option['value']}\"{$this->optionAttributes($option)}>{$option['label']}</option>";
     }
-
 }
-

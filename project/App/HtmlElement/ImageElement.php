@@ -74,7 +74,7 @@ class ImageElement extends HtmlElement
 
 
         //check if the src file exists
-        if (!@file_exists($documentRoot.$src)) {
+        if (!@file_exists($documentRoot . $src)) {
             return '';
         }
 
@@ -87,22 +87,21 @@ class ImageElement extends HtmlElement
         $attributesString = '';
         if ($data && is_array($data)) {
             foreach ($data as $name => $value) {
-                $attributesString .= ' '.$name.'="'.$value.'"';
+                $attributesString .= ' ' . $name . '="' . $value . '"';
             }
         }
 
         //form picture tag
         $html = '<picture>';
         foreach (self::$sourceTypes as $type) {
-            $sourceSrc = str_replace('.'.$srcParts['extension'], '.'.$type, $src);
-            if (file_exists($documentRoot.$sourceSrc)) {
-                $html .= '<source srcset = "'.FileVersion::get($sourceSrc).'" type = "image/'.$type.'">';
+            $sourceSrc = str_replace('.' . $srcParts['extension'], '.' . $type, $src);
+            if (file_exists($documentRoot . $sourceSrc)) {
+                $html .= '<source srcset = "' . FileVersion::get($sourceSrc) . '" type = "image/' . $type . '">';
             }
         }
 
-        $html .= '<img src="'.FileVersion::get($src).'" '.$attributesString.'>'.'</picture>';
+        $html .= '<img src="' . FileVersion::get($src) . '" ' . $attributesString . '>' . '</picture>';
 
         return $html;
-
-}}
-
+    }
+}
