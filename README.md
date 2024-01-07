@@ -34,9 +34,12 @@ Přihlašovací údaje pro Adminer jsou:
 - Heslo: toor
 - Databáze: music
 
-Pomocí `docker exec -it --user www-data form-html-elements-db-relations_php_1 bash` můžeme vstoupit do kontejneru pro spuštění dalších příkazů, například `./bin/console`.
+Pomocí `docker exec -it --user www-data form-html-elements-db-relations_php_1 bash` můžeme vstoupit do kontejneru pro spuštění dalších příkazů.
 
 SQL soubory pro naplnění databáze a dotazy požadované v úloze jsou ve složce `project/sql`.
+
+Takhle vypadá uvodní stránka:
+![Alt text](project/www/img/index.jpg)
 
 --------------------------------------------------------------------------------------------
 
@@ -73,6 +76,8 @@ The login credentials for Adminer are:
 - Password: toor
 - Database: music
 
-Using `docker exec -it --user www-data form-html-elements-db-relations_php_1 bash`, we can enter the container to run additional commands, such as `./bin/console`.
+Using `docker exec -it --user www-data form-html-elements-db-relations_php_1 bash`, we can enter the container to run additional commands.
 
 SQL files for populating the database and queries required for the task are located in the `project/sql` folder.
+
+![Alt text](project/www/img/index.jpg)
