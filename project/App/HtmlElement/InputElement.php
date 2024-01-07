@@ -6,7 +6,7 @@ namespace App\HtmlElement;
 
 class InputElement extends FormElement
 {
-    protected $inputTypes = [
+    public $inputTypes = [
         'button',
         'checkbox',
         'color',
@@ -58,7 +58,7 @@ class InputElement extends FormElement
      *
      * @var array
      */
-    protected $attributesConfig = [
+    public $attributesConfig = [
         'value' => [
             '_escape_function' => 'esc_attr',
         ],

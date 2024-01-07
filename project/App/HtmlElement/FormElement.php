@@ -18,11 +18,6 @@ use Exception;
 class FormElement extends HtmlElement
 {
 
-    /**
-     * @var array $children Holds an array of children elements.
-     */
-    protected array $children = [];
-
     public function __construct()
     {
         parent::__construct('form');
@@ -43,37 +38,32 @@ class FormElement extends HtmlElement
         return $formElement;
     }
 
-    /**
-     * Renders the HTML representation of the element.
-     *
-     * @return string Returns the rendered HTML string.
-     */
-    public function render(): string
-    {
-        $attributesString = $this->renderAttributes();
-        $childrenString = $this->renderChildren();
-
-        return "<{$this->tagName}{$attributesString}>{$childrenString}</{$this->tagName}>";
-    }
-
-
     public function setAttribute(string $string, string $name)
     {
     }
 
     /**
-     * Renders the children elements as a string.
+     * Single radio.
      *
-     * @return string Returns the string representation of the children elements.
+     * @param array $option
+     *
+     * @return string : html
      */
-    protected function renderChildren(): string
+    public function radioSingle(array $option)
     {
-        $childrenString = '';
-        foreach ($this->children as $child) {
-            $childrenString .= $child->render();
-        }
+        return "<label><input type=\"radio\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
+    }
 
-        return $childrenString;
+    /**
+     * Single select option.
+     *
+     * @param array $option
+     *
+     * @return string : html
+     */
+    public function selectSingle(array $option)
+    {
+        return "<option value=\"{$option['value']}\"{$this->optionAttributes($option)}>{$option['label']}</option>";
     }
 
 }

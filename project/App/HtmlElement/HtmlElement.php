@@ -11,7 +11,7 @@ class HtmlElement
      * @param array $attributes:
      * @return string html
      */
-    protected function meta(array $attributes = [])
+    public function meta(array $attributes = [])
     {
         return $this->singleTag('meta', $attributes);
     }
@@ -22,7 +22,7 @@ class HtmlElement
      * @param array $attributes:
      * @return string html
      */
-    protected function img(array $attributes = [])
+    public function img(array $attributes = [])
     {
         return $this->singleTag('img', $attributes);
     }
@@ -33,7 +33,7 @@ class HtmlElement
      * @param array $attributes:
      * @return string html
      */
-    protected function base(array $attributes = [])
+    public function base(array $attributes = [])
     {
         return $this->singleTag('base', $attributes);
     }
@@ -44,7 +44,7 @@ class HtmlElement
      * @param array $attributes:
      * @return string html
      */
-    protected function link(array $attributes = [])
+    public function link(array $attributes = [])
     {
         return $this->singleTag('link', $attributes);
     }
@@ -55,7 +55,7 @@ class HtmlElement
      * @param array $attributes:
      * @return string html
      */
-    protected function frame(array $attributes = [])
+    public function frame(array $attributes = [])
     {
         return $this->singleTag('frame', $attributes);
     }
@@ -67,31 +67,31 @@ class HtmlElement
      * @param array $attributes
      * @return string html
      */
-    protected function singleTag($type, array $attributes = [])
+    public function singleTag($type, array $attributes = [])
     {
         $this->setProperties($type, '', $attributes);
 
         return $this->publish("<{$type}{$this->attributes()}/>");
     }
 
-//    /**
-//     * Generate html tag.
-//     *
-//     * @param string $type:
-//     *            tag type, e.g. p, div, label
-//     * @param string $default:
-//     *            Text for element
-//     * @param array $attributes:
-//     *            (optional)
-//     *
-//     * @return string : html
-//     */
-//    protected function tag($type, $default = null, array $attributes = [])
-//    {
-//        $this->setProperties($type, $default, $attributes);
-//
-//        return $this->publish("<{$type}{$this->attributes()}>$default</$type>");
-//    }
+    /**
+     * Generate html tag.
+     *
+     * @param string $type:
+     *            tag type, e.g. p, div, label
+     * @param string $default:
+     *            Text for element
+     * @param array $attributes:
+     *            (optional)
+     *
+     * @return string : html
+     */
+    public function tag($type, $default = null, array $attributes = [])
+    {
+        $this->setProperties($type, $default, $attributes);
+
+        return $this->publish("<{$type}{$this->attributes()}>$default</$type>");
+    }
 
     /**
      * Counting number of options.
@@ -169,7 +169,7 @@ class HtmlElement
      *
      * @return string : html radio
      */
-    protected function radioList($default = null, array $attributes = [], array $options = []): string
+    public function radioList($default = null, array $attributes = [], array $options = []): string
     {
         $this->setProperties('radio', $default, $attributes, $options);
 
@@ -213,7 +213,7 @@ class HtmlElement
      *
      * @param array $options:
      */
-    protected function setOptions(array $options): void
+    public function setOptions(array $options): void
     {
         if (empty($options)) {
             return;
@@ -262,7 +262,7 @@ class HtmlElement
      * @return string : html atributes
      * @throws Exception
      */
-    protected function optionAttributes(array $option): string
+    public function optionAttributes(array $option): string
     {
         ++ $this->optionCount;
 
@@ -288,7 +288,7 @@ class HtmlElement
      * @param array $option
      * @return string : html atributes
      */
-    protected function groupAttributes(array $option): string
+    public function groupAttributes(array $option): string
     {
         $attributes = $this->removeKeys($option, [
             'type',
@@ -304,7 +304,7 @@ class HtmlElement
      * @param array $attributes
      * @return array : $attributes
      */
-    protected function refineOptionsAttributes(array &$attributes): array
+    public function refineOptionsAttributes(array &$attributes): array
     {
         foreach ($attributes as $key => $val) {
             if ($this->type == 'checkboxList' && $key == 'name' && $val) {
@@ -337,7 +337,7 @@ class HtmlElement
      * @return array : e.g. ['checked' => 'checked'] | []
      * @throws Exception
      */
-    protected function getSelectedAttribute(array $option): array
+    public function getSelectedAttribute(array $option): array
     {
         switch ($this->type) {
             case 'select':
@@ -385,7 +385,7 @@ class HtmlElement
      *
      * @return string : option html
      */
-    protected function buildOptions()
+    public function buildOptions()
     {
         $html = '';
         foreach ($this->options as $option) {
@@ -402,7 +402,7 @@ class HtmlElement
                     $inGroup = true;
                 }
             } else {
-                $html .= $this->_buildSingleOption($option);
+                $html .= $this->buildSingleOption($option);
             }
         }
 
@@ -421,7 +421,7 @@ class HtmlElement
      *
      * @return string : option html
      */
-    protected function _buildSingleOption(array $option)
+    public function buildSingleOption(array $option)
     {
         $option = $this->addKeys($option, [
             'value',
@@ -432,7 +432,7 @@ class HtmlElement
             '_option_after',
         ]);
 
-        return $this->_optionEnclose($option, 'before') . $this->callMethod('Single', $optionRefined) . $this->_optionEnclose($option, 'after');
+        return $this->optionEnclose($option, 'before') . $this->callMethod('Single', $optionRefined) . $this->optionEnclose($option, 'after');
     }
 
     /**
@@ -444,7 +444,7 @@ class HtmlElement
      *
      * @return string : text
      */
-    protected function _optionEnclose(array $option, $key = 'before')
+    public function optionEnclose(array $option, $key = 'before')
     {
         if (isset($option["_option_$key"])) {
             return $option["_option_$key"];
@@ -462,7 +462,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function groupStart(array $option)
+    public function groupStart(array $option)
     {
         $option = $this->addKeys($option, [
             'label',
@@ -476,7 +476,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function groupEnd()
+    public function groupEnd()
     {
         return $this->callMethod('groupEnd');
     }
@@ -489,9 +489,9 @@ class HtmlElement
      *
      * @return callback
      */
-    protected function callMethod($slug, $arg1 = null)
+    public function callMethod($slug, $arg1 = null)
     {
-        $methodName = "_{$this->type}{$slug}";
+        $methodName = "{$this->type}{$slug}";
         if (method_exists($this, $methodName)) {
             return $this->$methodName($arg1);
         } else {
@@ -506,7 +506,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _selectSingle(array $option)
+    public function selectSingle(array $option)
     {
         return "<option value=\"{$option['value']}\"{$this->optionAttributes($option)}>{$option['label']}</option>";
     }
@@ -518,9 +518,9 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _multiselectSingle(array $option)
+    public function multiselectSingle(array $option)
     {
-        return $this->_selectSingle($option);
+        return $this->selectSingle($option);
     }
 
     /**
@@ -530,7 +530,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _radioSingle(array $option)
+    public function radioSingle(array $option)
     {
         return "<label><input type=\"radio\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
     }
@@ -542,7 +542,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _checkboxListSingle(array $option): string
+    public function checkboxListSingle(array $option): string
     {
         return "<label><input type=\"checkbox\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
     }
@@ -554,7 +554,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _selectGroupStart(array $option)
+    public function selectGroupStart(array $option)
     {
         return "<optgroup label=\"{$option['label']}\"{$this->groupAttributes($option)}>";
     }
@@ -566,9 +566,9 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _multiselectGroupStart(array $option)
+    public function _multiselectGroupStart(array $option)
     {
-        return $this->_selectGroupStart($option);
+        return $this->selectGroupStart($option);
     }
 
     /**
@@ -578,7 +578,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _radioGroupStart(array $option)
+    public function radioGroupStart(array $option)
     {
         return "<div><label{$this->groupAttributes($option)}>{$option['label']}</label><br />";
     }
@@ -590,9 +590,9 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _checkboxListGroupStart($option)
+    public function _checkboxListGroupStart($option)
     {
-        return $this->_radioGroupStart($option);
+        return $this->radioGroupStart($option);
     }
 
     /**
@@ -600,7 +600,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _selectGroupEnd()
+    public function _selectGroupEnd()
     {
         return '</optgroup>';
     }
@@ -610,29 +610,9 @@ class HtmlElement
      *
      * @return string : html
      */
-    protected function _multiselectGroupEnd()
+    public function _multiselectGroupEnd()
     {
         return '</optgroup>';
-    }
-
-    /**
-     * Group end for radio.
-     *
-     * @return string : html
-     */
-    protected function _radioGroupEnd()
-    {
-        return '</div>';
-    }
-
-    /**
-     * Group end for checkboxList.
-     *
-     * @return string : html
-     */
-    protected function _checkboxListGroupEnd(): string
-    {
-        return '</div>';
     }
 
     /**
@@ -734,7 +714,7 @@ class HtmlElement
      *
      * @return string : html textarea
      */
-    protected function textarea(string $default = null, array $attributes = []): string
+    public function textarea(string $default = null, array $attributes = []): string
     {
         return $this->tag('textarea', \esc_textarea($default), $attributes);
     }
@@ -817,7 +797,7 @@ class HtmlElement
      *
      * @return string html
      */
-    protected function createInput()
+    public function createInput()
     {
         $html = $this->addLabel();
         $html .= '<input' . $this->attributes() . '/>';
@@ -950,7 +930,7 @@ class HtmlElement
      * Useful for making input fields.
      * name attribute was added to keep following order: type, name, value.
      */
-    protected function refineInputAttributes()
+    public function refineInputAttributes()
     {
         $this->attributes = array_merge([
             'type' => $this->type,
@@ -1270,7 +1250,7 @@ class HtmlElement
      *
      * @var array
      */
-    protected $config = [
+    public $config = [
         'LABEL' => 'label', // hard coded on OptionsElement
         'BEFORE' => '_before',
         'AFTER' => '_after',

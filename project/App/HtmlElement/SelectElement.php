@@ -65,7 +65,7 @@ class SelectElement extends HtmlElement
      * @param  string $options    The content or options of the element.
      * @return string The string representation of the HTML element.
      */
-    protected function getElementString(string $tag, string $attributes, string $options): string
+    public function getElementString(string $tag, string $attributes, string $options): string
     {
         return "<{$tag}{$attributes}>{$options}</{$tag}>";
     }
@@ -75,7 +75,7 @@ class SelectElement extends HtmlElement
      *
      * @return string The options as string representation.
      */
-    protected function renderOptions(): string
+    public function renderOptions(): string
     {
         $optionsString = '';
         foreach ($this->options as $option) {

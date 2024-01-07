@@ -19,7 +19,7 @@ class DivElement extends FormElement
      *
      * @return string : HTML
      */
-    protected function endGroup(): string
+    public function endGroup(): string
     {
         return '</div>';
     }

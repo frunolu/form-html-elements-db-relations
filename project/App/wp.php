@@ -1,9 +1,4 @@
 <?php
-/**
- * WordPress function for non WP users.
- *
- * @author Khaled Hossain
- */
 
 if (defined('ABSPATH') && file_exists( ABSPATH . 'wp-load.php' )) {
     return;
