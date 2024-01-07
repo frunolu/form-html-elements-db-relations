@@ -7,6 +7,9 @@ namespace App;
  * @author Khaled Hossain
  * @since 1.0.0
  */
+
+use Exception;
+
 trait OptionsElement
 {
 
@@ -18,7 +21,7 @@ trait OptionsElement
     /**
      * Alias of select method.
      *
-     * @param string $default:
+     * @param string|null $default:
      *            Default selected value
      * @param array $attributes
      * @param array $options:
@@ -26,7 +29,7 @@ trait OptionsElement
      *
      * @return string : html select
      */
-    protected function dropdown($default = null, array $attributes = [], array $options = [])
+    protected function dropdown(string $default = null, array $attributes = [], array $options = []): string
     {
         return $this->select($default, $attributes, $options);
     }
@@ -108,7 +111,7 @@ trait OptionsElement
      *
      * @return string : html checkboxes
      */
-    protected function checkboxList($default = null, array $attributes = [], array $options = [])
+    public function checkboxList($default = null, array $attributes = [], array $options = [])
     {
         $this->setProperties('checkboxList', $default, $attributes, $options);
 
@@ -249,12 +252,13 @@ trait OptionsElement
     /**
      * Get selected/checked attribute.
      *
-     * @param array $option:
+     * @param array $option :
      *            single option or attributes contains key 'value'
      *
      * @return array : e.g. ['checked' => 'checked'] | []
+     * @throws Exception
      */
-    protected function getSelectedAttribute(array $option)
+    protected function getSelectedAttribute(array $option): array
     {
         switch ($this->type) {
             case 'select':
@@ -412,7 +416,7 @@ trait OptionsElement
         if (method_exists($this, $methodName)) {
             return $this->$methodName($arg1);
         } else {
-            throw new \Exception(get_class($this) . "::$methodName() does not exists!");
+            throw new Exception(get_class($this) . "::$methodName() does not exists!");
         }
     }
 
@@ -459,7 +463,7 @@ trait OptionsElement
      *
      * @return string : html
      */
-    protected function _checkboxListSingle(array $option)
+    protected function _checkboxListSingle(array $option): string
     {
         return "<label><input type=\"checkbox\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
     }
@@ -547,7 +551,7 @@ trait OptionsElement
      *
      * @return string : html
      */
-    protected function _checkboxListGroupEnd()
+    protected function _checkboxListGroupEnd(): string
     {
         return '</div>';
     }
