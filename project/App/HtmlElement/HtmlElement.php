@@ -221,7 +221,7 @@ class HtmlElement
         }
 
         $isIndexedArray = $options === array_values($options);
-        $isIntegerKeys = $this->_isIntegerKeys($options);
+        $isIntegerKeys = $this->isIntegerKeys($options);
 
         $opt = [];
         foreach ($options as $key => $attr) {
@@ -233,7 +233,7 @@ class HtmlElement
                     $single = $attr;
                 } else {
                     $single['value'] = $key;
-                    list ($label, $attr) = $this->_splitFirstFromArray($attr);
+                    list ($label, $attr) = $this->splitFirstFromArray($attr);
                     $single['label'] = $label;
                     foreach ($attr as $k => $v) {
                         $single[$k] = $v;
@@ -437,7 +437,12 @@ class HtmlElement
             '_option_after',
         ]);
 
-        return $this->optionEnclose($option, 'before') . $this->callMethod('Single', $optionRefined) . $this->optionEnclose($option, 'after');
+        return sprintf(
+            "%s%s%s",
+            $this->optionEnclose($option, 'before'),
+            $this->callMethod('Single', $optionRefined),
+            $this->optionEnclose($option, 'after')
+        );
     }
 
     /**
@@ -537,7 +542,12 @@ class HtmlElement
      */
     public function radioSingle(array $option)
     {
-        return "<label><input type=\"radio\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
+        return sprintf(
+            "<label><input type=\"radio\" value=\"%s\"%s/> %s</label>",
+            $option['value'],
+            $this->optionAttributes($option),
+            $option['label']
+        );
     }
 
     /**
@@ -549,7 +559,12 @@ class HtmlElement
      */
     public function checkboxListSingle(array $option): string
     {
-        return "<label><input type=\"checkbox\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
+        return sprintf(
+            "<label><input type=\"checkbox\" value=\"%s\"%s/> %s</label>",
+            $option['value'],
+            $this->optionAttributes($option),
+            $option['label']
+        );
     }
 
     /**
@@ -571,7 +586,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    public function _multiselectGroupStart(array $option)
+    public function multiselectGroupStart(array $option)
     {
         return $this->selectGroupStart($option);
     }
@@ -595,7 +610,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    public function _checkboxListGroupStart($option)
+    public function checkboxListGroupStart($option)
     {
         return $this->radioGroupStart($option);
     }
@@ -605,7 +620,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    public function _selectGroupEnd()
+    public function selectGroupEnd()
     {
         return '</optgroup>';
     }
@@ -615,7 +630,7 @@ class HtmlElement
      *
      * @return string : html
      */
-    public function _multiselectGroupEnd()
+    public function multiselectGroupEnd()
     {
         return '</optgroup>';
     }
@@ -626,7 +641,7 @@ class HtmlElement
      * @param array $array
      * @return boolean
      */
-    private function _isIntegerKeys(array $array)
+    private function isIntegerKeys(array $array)
     {
         return count(array_filter(array_keys($array), 'is_int')) == count($array);
     }
@@ -841,7 +856,7 @@ class HtmlElement
         }
 
         if (! empty($this->attributes[$this->config['ENCLOSE']])) {
-            list ($type, $attr) = $this->_splitFirstFromArray($this->attributes[$this->config['ENCLOSE']]);
+            list ($type, $attr) = $this->splitFirstFromArray($this->attributes[$this->config['ENCLOSE']]);
             $html = $this->tag($type, $html, $attr);
         }
 
@@ -858,7 +873,7 @@ class HtmlElement
     private function addLabel()
     {
         if (isset($this->attributes['label'])) {
-            list ($default, $attr) = $this->_splitFirstFromArray($this->attributes[$this->config['LABEL']]);
+            list ($default, $attr) = $this->splitFirstFromArray($this->attributes[$this->config['LABEL']]);
 
             if (
                 isset($this->attributes['id']) && ! in_array($this->type, [
@@ -886,7 +901,7 @@ class HtmlElement
      * @param string|array $args
      * @return array list($first, $args)
      */
-    private function _splitFirstFromArray($args)
+    private function splitFirstFromArray($args)
     {
         if (is_array($args)) {
             $first = isset($args[0]) ? $args[0] : null;
@@ -1185,7 +1200,7 @@ class HtmlElement
      * @param
      *            string methodName
      */
-    private function _determineInputOrTag($method)
+    private function determineInputOrTag($method)
     {
         return in_array($method, $this->inputTypes) ? 'input' : 'tag';
     }
@@ -1207,7 +1222,7 @@ class HtmlElement
 //        try {
 //            if (! method_exists($instance, $method)) {
 //                array_unshift($args, $method);
-//                $method = $instance->_determineInputOrTag($method);
+//                $method = $instance->determineInputOrTag($method);
 //            }
 //
 //            return call_user_func_array([

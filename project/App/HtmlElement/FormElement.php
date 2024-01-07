@@ -50,7 +50,12 @@ class FormElement extends HtmlElement
      */
     public function radioSingle(array $option)
     {
-        return "<label><input type=\"radio\" value=\"{$option['value']}\"{$this->optionAttributes($option)}/> {$option['label']}</label>";
+        return sprintf(
+            "<label><input type=\"radio\" value=\"%s\"%s/> %s</label>",
+            $option['value'],
+            $this->optionAttributes($option),
+            $option['label']
+        );
     }
 
     /**
