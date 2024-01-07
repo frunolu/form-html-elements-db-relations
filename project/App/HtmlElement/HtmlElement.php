@@ -72,24 +72,24 @@ class HtmlElement
         return $this->_publish("<{$type}{$this->attributes()}/>");
     }
 
-    /**
-     * Generate html tag.
-     *
-     * @param string $type:
-     *            tag type, e.g. p, div, label
-     * @param string $default:
-     *            Text for element
-     * @param array $attributes:
-     *            (optional)
-     *
-     * @return string : html
-     */
-    protected function tag($type, $default = null, array $attributes = [])
-    {
-        $this->setProperties($type, $default, $attributes);
-
-        return $this->_publish("<{$type}{$this->attributes()}>$default</$type>");
-    }
+//    /**
+//     * Generate html tag.
+//     *
+//     * @param string $type:
+//     *            tag type, e.g. p, div, label
+//     * @param string $default:
+//     *            Text for element
+//     * @param array $attributes:
+//     *            (optional)
+//     *
+//     * @return string : html
+//     */
+//    protected function tag($type, $default = null, array $attributes = [])
+//    {
+//        $this->setProperties($type, $default, $attributes);
+//
+//        return $this->_publish("<{$type}{$this->attributes()}>$default</$type>");
+//    }
 
     /**
      * Counting number of options.
@@ -107,7 +107,7 @@ class HtmlElement
      *
      * @return string : html select
      */
-    protected function dropdown(string $default = null, array $attributes = [], array $options = []): string
+    public function dropdown(string $default = null, array $attributes = [], array $options = []): string
     {
         return $this->select($default, $attributes, $options);
     }
@@ -123,7 +123,7 @@ class HtmlElement
      *
      * @return string : html select
      */
-    protected function select($default = null, array $attributes = [], array $options = []): string
+    public function select($default = null, array $attributes = [], array $options = []): string
     {
         $this->setProperties('select', $default, $attributes, $options);
 
@@ -738,7 +738,7 @@ class HtmlElement
      *
      * @return string : html text input
      */
-    protected function text($default = null, array $attributes = [])
+    public function text($default = null, array $attributes = [])
     {
         return $this->input('text', $default, $attributes);
     }
@@ -770,7 +770,7 @@ class HtmlElement
      *
      * @return string : html checkbox
      */
-    protected function checkbox(bool $default = false, array $attributes = [], array $options = []): string
+    public function checkbox(bool $default = false, array $attributes = [], array $options = []): string
     {
         if (! empty($options)) {
             return $this->checkboxList($default, $attributes, $options);
@@ -791,7 +791,7 @@ class HtmlElement
      *
      * @return string : html checkbox
      */
-    protected function radio($default = false, array $attributes = [], array $options = [])
+    public function radio($default = false, array $attributes = [], array $options = [])
     {
         if (! empty($options)) {
             return $this->radioList($default, $attributes, $options);
@@ -811,7 +811,7 @@ class HtmlElement
      *
      * @return string : Generic html input
      */
-    protected function input($type, $default = null, array $attributes = [])
+    public function input($type, $default = null, array $attributes = [])
     {
         $this->setProperties($type, $default, $attributes);
         $this->_refineInputAttributes();
@@ -1000,7 +1000,7 @@ class HtmlElement
         $attributes = $this->attributes;
         $attributes = $this->onlyNonEmpty($attributes);
         $attributes = $this->onlyString($attributes);
-        $attributes = $this->escapeAttributes($attributes);
+//        $attributes = $this->escapeAttributes($attributes);
         $attributes = $this->removeKeys($attributes, $this->config);
 
         return $attributes;
@@ -1026,51 +1026,51 @@ class HtmlElement
         return $string;
     }
 
-    /**
-     * Escape attributes before display.
-     *
-     * @param array $attributes
-     * @return array
-     */
-    private function escapeAttributes(array $attributes)
-    {
-        if (! empty($attributes[$this->config['DISABLE_ESCAPE']])) {
-            return $attributes;
-        }
+//    /**
+//     * Escape attributes before display.
+//     *
+//     * @param array $attributes
+//     * @return array
+//     */
+//    private function escapeAttributes(array $attributes)
+//    {
+//        if (! empty($attributes[$this->config['DISABLE_ESCAPE']])) {
+//            return $attributes;
+//        }
+//
+//        foreach ($attributes as $key => $value) {
+//            $attributeConfig = ! empty($this->attributesConfig[$key]) ? $this->attributesConfig[$key] : [];
+//            if (! empty($attributeConfig['_escape_function'])) {
+//                $escapeFunction = $attributeConfig['_escape_function'];
+//            }
+//
+//            if (! empty($escapeFunction)) {
+//                $attributes[$key] = $this->escapeDeep($value, $escapeFunction);
+//            }
+//            unset($escapeFunction);
+//        }
+//
+//        return $attributes;
+//    }
 
-        foreach ($attributes as $key => $value) {
-            $attributeConfig = ! empty($this->attributesConfig[$key]) ? $this->attributesConfig[$key] : [];
-            if (! empty($attributeConfig['_escape_function'])) {
-                $escapeFunction = $attributeConfig['_escape_function'];
-            }
-
-            if (! empty($escapeFunction)) {
-                $attributes[$key] = $this->escapeDeep($value, $escapeFunction);
-            }
-            unset($escapeFunction);
-        }
-
-        return $attributes;
-    }
-
-    /**
-     * Apply escape function to data.
-     *
-     * @param array|string $data
-     * @param string $functionName
-     * @return mixed
-     */
-    private function escapeDeep($data, $functionName)
-    {
-        if (is_array($data)) {
-            echo $data;
-            return array_map($functionName, $data);
-        } elseif (is_string($data)) {
-            return call_user_func($functionName, $data);
-        }
-
-        return $data;
-    }
+//    /**
+//     * Apply escape function to data.
+//     *
+//     * @param array|string $data
+//     * @param string $functionName
+//     * @return mixed
+//     */
+//    private function escapeDeep($data, $functionName)
+//    {
+//        if (is_array($data)) {
+//            echo $data;
+//            return array_map($functionName, $data);
+//        } elseif (is_string($data)) {
+//            return call_user_func($functionName, $data);
+//        }
+//
+//        return $data;
+//    }
 
     /**
      * Apply esc_attr/htmlspecialchars to both input string and array.
@@ -1212,70 +1212,70 @@ class HtmlElement
         return in_array($method, $this->inputTypes) ? 'input' : 'tag';
     }
 
-    /**
-     * Build html element.
-     * Every _build() is creating new instance to avoid confliction.
-     *
-     * @param string $method:
-     *            Method name to call
-     * @param array $args:
-     *            Arguments array to pass to invocked method call
-     *
-     * @return string html
-     */
-    private static function _build($method, array $args)
-    {
-        $instance = new static();
-        try {
-            if (! method_exists($instance, $method)) {
-                array_unshift($args, $method);
-                $method = $instance->_determineInputOrTag($method);
-            }
+//    /**
+//     * Build html element.
+//     * Every _build() is creating new instance to avoid confliction.
+//     *
+//     * @param string $method:
+//     *            Method name to call
+//     * @param array $args:
+//     *            Arguments array to pass to invocked method call
+//     *
+//     * @return string html
+//     */
+//    private static function _build($method, array $args)
+//    {
+//        $instance = new static();
+//        try {
+//            if (! method_exists($instance, $method)) {
+//                array_unshift($args, $method);
+//                $method = $instance->_determineInputOrTag($method);
+//            }
+//
+//            return call_user_func_array([
+//                $instance,
+//                $method
+//            ], $args);
+//        } catch (\Exception $e) {
+//            return 'Exception: ' . $e->getMessage() . "\n";
+//        }
+//    }
 
-            return call_user_func_array([
-                $instance,
-                $method
-            ], $args);
-        } catch (\Exception $e) {
-            return 'Exception: ' . $e->getMessage() . "\n";
-        }
-    }
+//    /**
+//     * Call dynamic instance methods.
+//     * eg: $form->text();
+//     *
+//     * @param string $method:
+//     *            Method name to call
+//     * @param array $args:
+//     *            Arguments array to pass to invocked method call
+//     *
+//     * @return string html
+//     */
+//    public function __call($method, $args)
+//    {
+//        $html = static::_build($method, $args);
+//        if ($html)
+//            $this->default[] = $html;
+//
+//        return $html;
+//    }
 
-    /**
-     * Call dynamic instance methods.
-     * eg: $form->text();
-     *
-     * @param string $method:
-     *            Method name to call
-     * @param array $args:
-     *            Arguments array to pass to invocked method call
-     *
-     * @return string html
-     */
-    public function __call($method, $args)
-    {
-        $html = static::_build($method, $args);
-        if ($html)
-            $this->default[] = $html;
-
-        return $html;
-    }
-
-    /**
-     * Call static methods.
-     * eg: FormElement::text('something');
-     *
-     * @param string $method:
-     *            Method name to call
-     * @param array $args:
-     *            Arguments array to pass to invocked method call
-     *
-     * @return string html
-     */
-    public static function __callStatic($method, $args)
-    {
-        return static::_build($method, $args);
-    }
+//    /**
+//     * Call static methods.
+//     * eg: FormElement::text('something');
+//     *
+//     * @param string $method:
+//     *            Method name to call
+//     * @param array $args:
+//     *            Arguments array to pass to invocked method call
+//     *
+//     * @return string html
+//     */
+//    public static function __callStatic($method, $args)
+//    {
+//        return static::_build($method, $args);
+//    }
 
 
     /**

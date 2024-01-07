@@ -27,6 +27,10 @@ class FormElement extends HtmlElement
         parent::__construct('form');
     }
 
+    public static function label(string $string, array $array)
+    {
+    }
+
     /**
      * Adds an input element to the list of children.
      *
