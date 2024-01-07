@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\HtmlElement;
 
-use Exception;
-
 /**
  * Class FormElement
  *
@@ -37,8 +35,14 @@ class FormElement extends HtmlElement
         return $formElement;
     }
 
-    public function setAttribute(string $string, string $name)
+        /**
+         * @param string $string
+         * @param string $name
+         * @return void
+         */
+        public function setAttributes(string $string, string $name): void
     {
+        $this->attributes[$string] = $name;
     }
 
     /**
@@ -50,12 +54,20 @@ class FormElement extends HtmlElement
      */
     public function radioSingle(array $option)
     {
-        return sprintf(
-            "<label><input type=\"radio\" value=\"%s\"%s/> %s</label>",
-            $option['value'],
-            $this->optionAttributes($option),
-            $option['label']
-        );
+        return $this->generateRadioHtml($option['value'], $this->optionAttributes($option), $option['label']);
+    }
+
+    /**
+     * Generate the HTML string for a single radio button.
+     *
+     * @param string $value
+     * @param string $attributes
+     * @param string $label
+     * @return string
+     */
+    public function generateRadioHtml(string $value, string $attributes, string $label): string
+    {
+        return "<label><input type=\"radio\" value=\"".$value."\"".$attributes."/> ".$label."</label>";
     }
 
     /**

@@ -43,7 +43,7 @@ class AElement extends HtmlElement
     public function buildAElement(string $href, string $text): AElement
     {
         $element = new self();
-        $element->setAttribute('href', $href);
+        $element->setAttributes('href', $href);
         $element->setInnerText($text);
 
         return $element;

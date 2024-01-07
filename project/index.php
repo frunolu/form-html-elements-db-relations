@@ -6,41 +6,39 @@ require_once 'App/HtmlElement/FormElement.php';
 require_once 'App/HtmlElement/InputElement.php';
 require_once 'App/HtmlElement/ImageElement.php';
 
-var_dump(@$_SERVER['DOCUMENT_ROOT']);
-
 use App\HtmlElement\FormElement;
 use App\HtmlElement\ImageElement;
 use App\HtmlElement\InputElement;
 
-$element = new FormElement();
+$formElement = new FormElement();
 $input = new InputElement();
 $image = new ImageElement();
 
-echo $element->text('music');
+echo $formElement->text('music');
 
-echo $element->text('music', ['name' => 'Name', 'id' => 'ID', 'class' => 'Class']);
+echo $formElement->text('music', ['name' => 'Name', 'id' => 'ID', 'class' => 'Class']);
 
-echo $element->input('email', 'music@gmail.com');
+echo $formElement->input('email', 'music@gmail.com');
 
-echo $element->checkbox(true, ['name' => 'Name', 'id' => 'ID']);
+echo $formElement->checkbox(true, ['name' => 'Name', 'id' => 'ID']);
 
-echo $element->checkboxList(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
+echo $formElement->checkboxList(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
 
-echo $element->select(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
+echo $formElement->select(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
 
-echo $element->radio(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
+echo $formElement->radio(['song'], ['name' => 'Name', 'id' => 'ID'], ['song 1' => 'song 1', 'song 2' => 'song 2']);
 
 echo $input->input('email', 'music@gmail.com');
 
 echo $input->input('button', 'submit', ['name' => 'submitButton', 'value' => 'Submit']);
 
-echo $element->dropdown(
+echo $formElement->dropdown(
     ['song'],
     ['name' => 'Name', 'id' => 'ID'],
     ['song 1' => 'song 1', 'song 2' => 'song 2']
 );
 
-echo $element->multiselect(
+echo $formElement->multiselect(
     ['song1', 'song2'],
     ['name' => 'MySelect', 'id' => 'MyID', 'class' => 'MyClass'],
     [

@@ -10,7 +10,6 @@
     }],
     "require": {
         "php": ">=8.0.0",
-        "almeyda/html-picture-element": "*",
         "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
