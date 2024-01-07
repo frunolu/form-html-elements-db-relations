@@ -9,7 +9,8 @@
         "name": "Lukas Fruno"
     }],
     "require": {
-        "php": ">=8.0.0"
+        "php": ">=8.0.0",
+        "almeyda/html-picture-element": "*"
     },
     "autoload": {
         "psr-4": {
@@ -20,5 +21,6 @@
         "allow-plugins": {
             "symfony/thanks": true
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

@@ -30,25 +30,11 @@ class ImageElement extends HtmlElement
     {
         return $this->attributes['src'] ?? '';
     }
-}
 
 
-/**
- * @copyright Copyright (c) 2018 Solutlux LLC
- * @link https://github.com/almeyda/html-picture-element.git
- *
- * The full copyright and license information is stored in the LICENSE file distributed with this source code.
- */
 
-namespace almeyda\htmlpicture\src;
 
-use almeyda\fileversion\src\FileVersion;
 
-/**
- * Class HtmlPicture renders picture tag according HTML specifications
- */
-class HtmlPicture
-{
     /**
      * @var array image types to be collected and rendered into picture tag
      */
@@ -80,7 +66,7 @@ class HtmlPicture
      * @param mixed $sourceTypes
      * @return string
      */
-    public static function get($src, $attributes = false, $sourceTypes = false)
+    public static function get(string $src, $attributes = false, $sourceTypes = false)
     {
         $documentRoot = @$_SERVER['DOCUMENT_ROOT'];
 
@@ -114,6 +100,6 @@ class HtmlPicture
         $html .= '<img src="'.FileVersion::get($src).'" '.$attributesString.'>'.'</picture>';
 
         return $html;
-    }
-}
+
+}}
 
