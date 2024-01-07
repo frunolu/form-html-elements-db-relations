@@ -4,28 +4,6 @@ namespace App\HtmlElement;
 
 class SelectElement extends HtmlElement
 {
-    private const TAG_NAME = 'select';
-
-    public $options = [];
-    private $tagName;
-
-    public function __construct()
-    {
-        parent::__construct(self::TAG_NAME);
-    }
-
-    public function buildSelectElement(string $name, array $options): SelectElement
-    {
-        $selectElement = new SelectElement();
-        $selectElement->setAttribute('name', $name);
-
-        foreach ($options as $value => $text) {
-            $selectElement->addOption($value, $text);
-        }
-
-        return $selectElement;
-    }
-
     /**
      * Adds an option to the 'options' array.
      *
@@ -38,23 +16,6 @@ class SelectElement extends HtmlElement
         $this->options[] = ['value' => $value, 'text' => $text];
 
         return $this;
-    }
-
-    /**
-     * Renders the element as a string.
-     *
-     * This method returns a string representation of the element after rendering
-     * its attributes and options. It uses the `renderAttributes` and `renderOptions`
-     * methods internally to generate the necessary HTML markup.
-     *
-     * @return string The rendered element as a string.
-     */
-    public function render(): string
-    {
-        $attributesString = $this->renderAttributes();
-        $optionsString = $this->renderOptions();
-
-        return $this->getElementString($this->tagName, $attributesString, $optionsString);
     }
 
     /**

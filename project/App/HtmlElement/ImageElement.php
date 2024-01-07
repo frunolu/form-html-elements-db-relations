@@ -8,12 +8,8 @@ use almeyda\fileversion\src\FileVersion;
 
 class ImageElement extends HtmlElement
 {
-    public function __construct()
-    {
-        parent::__construct('img');
-    }
 
-    /**
+     /**
      * @param  string $src
      * @return $this
      */
@@ -32,10 +28,6 @@ class ImageElement extends HtmlElement
     {
         return $this->attributes['src'] ?? '';
     }
-
-
-
-
 
     /**
      * @var array image types to be collected and rendered into picture tag
@@ -63,12 +55,12 @@ class ImageElement extends HtmlElement
 
     /**
      * form picture element
-     * @param string $src
-     * @param bool|null $data
-     * @param bool|null $default
+     * @param $src
+     * @param $data
+     * @param $default
      * @return string
      */
-    public static function get(string $src, bool|null $data = false, bool|null $default = false): string
+    public function get($src, $data = false,$default = false): string
     {
         $documentRoot = @$_SERVER['DOCUMENT_ROOT'];
 
@@ -96,12 +88,32 @@ class ImageElement extends HtmlElement
         foreach (self::$sourceTypes as $type) {
             $sourceSrc = str_replace('.' . $srcParts['extension'], '.' . $type, $src);
             if (file_exists($documentRoot . $sourceSrc)) {
-                $html .= '<source srcset = "' . FileVersion::get($sourceSrc) . '" type = "image/' . $type . '">';
+                $html .= '<source srcset = "' .self::getFileVersion($sourceSrc). '" type = "image/' . $type . '">';
             }
         }
 
-        $html .= '<img src="' . FileVersion::get($src) . '" ' . $attributesString . '>' . '</picture>';
+        $html .= '<img src="' .self::getFileVersion($src). '" ' . $attributesString . '>' . '</picture>';
 
         return $html;
+    }
+
+    /**
+     * Adds timestamp of the latest file modification.
+     * This could be used to automatically reset cached version of files in browser (css, js, ...) after file updated
+     *
+     * @param string $filePath relative path from to the file
+     * @return string
+     */
+    public static function getFileVersion($filePath)
+    {
+        //get absolute file path
+        $fileAbsPath = @$_SERVER['DOCUMENT_ROOT'] . $filePath;
+
+        //add datetime parameter
+        if (file_exists($fileAbsPath)) {
+            $filePath .= ((strpos($filePath, '?')) ? '&' : '?') . 'v=' . filemtime($fileAbsPath);
+        }
+
+        return $filePath;
     }
 }

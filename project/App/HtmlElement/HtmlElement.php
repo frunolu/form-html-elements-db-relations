@@ -102,7 +102,7 @@ class HtmlElement
     /**
      * Alias of select method.
      *
-     * @param string|null $default:
+     * @param string $default:
      *            Default selected value
      * @param array $attributes
      * @param array $options:
@@ -110,7 +110,7 @@ class HtmlElement
      *
      * @return string : html select
      */
-    public function dropdown(string $default = null, array $attributes = [], array $options = []): string
+    public function dropdown($default = null, array $attributes = [], array $options = []): string
     {
         return $this->select($default, $attributes, $options);
     }
@@ -381,7 +381,6 @@ class HtmlElement
             ] : [];
         }
 
-        return [];
     }
 
     /**
