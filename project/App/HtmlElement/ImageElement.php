@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\HtmlElement;
 
+use almeyda\fileversion\src\FileVersion;
+
 class ImageElement extends HtmlElement
 {
     public function __construct()
@@ -50,7 +52,7 @@ class ImageElement extends HtmlElement
      * set image types
      * @param $sourceTypes
      */
-    public static function setSourceTypes($sourceTypes)
+    public static function setSourceTypes($sourceTypes): void
     {
         if ($sourceTypes) {
             self::$sourceTypes = $sourceTypes;
@@ -62,13 +64,14 @@ class ImageElement extends HtmlElement
     /**
      * form picture element
      * @param string $src
-     * @param mixed $attributes
-     * @param mixed $sourceTypes
+     * @param bool|null $data
+     * @param bool|null $default
      * @return string
      */
-    public static function get(string $src, $attributes = false, $sourceTypes = false)
+    public static function get(string $src, bool|null $data = false, bool|null $default = false): string
     {
         $documentRoot = @$_SERVER['DOCUMENT_ROOT'];
+
 
         //check if the src file exists
         if (!@file_exists($documentRoot.$src)) {
@@ -76,14 +79,14 @@ class ImageElement extends HtmlElement
         }
 
         //populate properties from configuration array
-        self::setSourceTypes($sourceTypes);
+        self::setSourceTypes($default);
 
         $srcParts = pathinfo($src);
 
         //collect attributes into string
         $attributesString = '';
-        if ($attributes && is_array($attributes)) {
-            foreach ($attributes as $name => $value) {
+        if ($data && is_array($data)) {
+            foreach ($data as $name => $value) {
                 $attributesString .= ' '.$name.'="'.$value.'"';
             }
         }

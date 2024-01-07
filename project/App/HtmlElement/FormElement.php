@@ -6,14 +6,14 @@ namespace App\HtmlElement;
 
 use Exception;
 
-
-
 /**
  * Class FormElement
  *
  * Represents an HTML form element.
  *
+ * @property $tagName
  * @extends HtmlElement
+ * @method renderAttributes()
  */
 class FormElement extends HtmlElement
 {
@@ -27,8 +27,19 @@ class FormElement extends HtmlElement
         parent::__construct('form');
     }
 
-    public static function label(string $string, array $array)
+    public static function createLabel(string $for, string $text): self
     {
+        return self::createNewElement('label', ['for' => $for], $text);
+    }
+
+    private static function createNewElement(string $tagName, array $attributes, string $innerText = ''): self
+    {
+        $formElement = new self();
+        $formElement->tagName = $tagName;
+        $formElement->attributes = $attributes;
+        $formElement->innerText = $innerText;
+
+        return $formElement;
     }
 
     /**
@@ -123,16 +134,11 @@ class FormElement extends HtmlElement
 
         return $this;
     }
-}
 
+    public function setAttribute(string $string, string $string1)
+    {
+    }
 
-/**
- * Class FormBuilder
- *
- * This class provides methods for building form elements and rendering the form.
- */
-class FormBuilder
-{
     /**
      * Create and render the form
      *

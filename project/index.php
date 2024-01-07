@@ -10,6 +10,7 @@ $element = new FormElement();
 
 echo "hello";
 
+//var_dump($_SERVER['DOCUMENT_ROOT']);
 echo $element->text('music');
 
 echo $element->text('music', ['name' => 'Name', 'id' => 'ID', 'class' => 'Class']);

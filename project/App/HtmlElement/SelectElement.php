@@ -96,5 +96,9 @@ class SelectElement extends HtmlElement
     {
         $this->attributes[$string] = $name;
     }
+
+    private function setAttribute(string $string, string $name)
+    {
+    }
 }
 

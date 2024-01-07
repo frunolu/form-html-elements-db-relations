@@ -1,6 +1,8 @@
 <?php
 namespace App\HtmlElement;
 
+use Exception;
+
 class HtmlElement
 {
     /**
@@ -189,7 +191,7 @@ class HtmlElement
      *
      * @return string : html checkboxes
      */
-    public function checkboxList($default = null, array $attributes = [], array $options = [])
+    public function checkboxList($default = null, array $attributes = [], array $options = []): string
     {
         $this->setProperties('checkboxList', $default, $attributes, $options);
 
@@ -211,7 +213,7 @@ class HtmlElement
      *
      * @param array $options:
      */
-    protected function setOptions(array $options)
+    protected function setOptions(array $options): void
     {
         if (empty($options)) {
             return;
@@ -256,11 +258,10 @@ class HtmlElement
     /**
      * Building options attributes.
      *
-     * @param array $options
-     *
+     * @param array $option
      * @return string : html atributes
      */
-    protected function optionAttributes(array $option)
+    protected function optionAttributes(array $option): string
     {
         ++ $this->optionCount;
 
@@ -283,11 +284,10 @@ class HtmlElement
     /**
      * Building optgroup | groups attributes.
      *
-     * @param array $options
-     *
+     * @param array $option
      * @return string : html atributes
      */
-    protected function groupAttributes(array $option)
+    protected function groupAttributes(array $option): string
     {
         $attributes = $this->removeKeys($option, [
             'type',
@@ -300,12 +300,10 @@ class HtmlElement
     /**
      * Apply refinement to options attributes, call by reference.
      *
-     * @param
-     *            array &$attributes
-     *
-     * @return array : $atributes
+     * @param array $attributes
+     * @return array : $attributes
      */
-    protected function refineOptionsAttributes(array &$attributes)
+    protected function refineOptionsAttributes(array &$attributes): array
     {
         foreach ($attributes as $key => $val) {
             if ($this->type == 'checkboxList' && $key == 'name' && $val) {
