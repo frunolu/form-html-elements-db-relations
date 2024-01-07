@@ -5,11 +5,6 @@ use Exception;
 
 class HtmlElement
 {
-    public function setAttribute()
-    {
-
-    }
-
     /**
      * Generate meta tag.
      *
@@ -76,7 +71,7 @@ class HtmlElement
     {
         $this->setProperties($type, '', $attributes);
 
-        return $this->_publish("<{$type}{$this->attributes()}/>");
+        return $this->publish("<{$type}{$this->attributes()}/>");
     }
 
 //    /**
@@ -95,7 +90,7 @@ class HtmlElement
 //    {
 //        $this->setProperties($type, $default, $attributes);
 //
-//        return $this->_publish("<{$type}{$this->attributes()}>$default</$type>");
+//        return $this->publish("<{$type}{$this->attributes()}>$default</$type>");
 //    }
 
     /**
@@ -138,7 +133,7 @@ class HtmlElement
 
         $html .= "<select{$this->attributes()}>{$this->buildOptions()}</select>";
 
-        return $this->_publish($html);
+        return $this->publish($html);
     }
 
     /**
@@ -160,7 +155,7 @@ class HtmlElement
 
         $html .= "<select{$this->attributes()} multiple=\"multiple\">{$this->buildOptions()}</select>";
 
-        return $this->_publish($html);
+        return $this->publish($html);
     }
 
     /**
@@ -265,6 +260,7 @@ class HtmlElement
      *
      * @param array $option
      * @return string : html atributes
+     * @throws Exception
      */
     protected function optionAttributes(array $option): string
     {
@@ -276,7 +272,7 @@ class HtmlElement
             'select',
             'multiselect',
         ])) {
-            $attributes = $this->_getRefinedAttributes();
+            $attributes = $this->getRefinedAttributes();
         }
 
         $attributes = array_merge($attributes, $option, $this->getSelectedAttribute($option));
@@ -714,26 +710,6 @@ class HtmlElement
     }
 
     /**
-     * render collection elements
-     *
-     * @return string|null html
-     */
-    public function render(): ?string
-    {
-        $type = $this->type ?: '';
-        $html = null;
-        foreach ($this->default as $element) {
-            if ($this->isString($element)) {
-                $html .= $element;
-            } elseif ($element instanceof HtmlElement) {
-                $html .= $element->render();
-            }
-        }
-
-        return $type ? static::$type($html, $this->attributes) : $html;
-    }
-
-    /**
      * Generate text input.
      *
      * @param string $default:
@@ -781,7 +757,7 @@ class HtmlElement
             return $this->checkboxList($default, $attributes, $options);
         }
 
-        return $this->_singleCheckboxRadio('checkbox', $default, $attributes);
+        return $this->singleCheckboxRadio('checkbox', $default, $attributes);
     }
 
     /**
@@ -802,7 +778,7 @@ class HtmlElement
             return $this->radioList($default, $attributes, $options);
         }
 
-        return $this->_singleCheckboxRadio('radio', $default, $attributes);
+        return $this->singleCheckboxRadio('radio', $default, $attributes);
     }
 
     /**
@@ -819,21 +795,21 @@ class HtmlElement
     public function input($type, $default = null, array $attributes = [])
     {
         $this->setProperties($type, $default, $attributes);
-        $this->_refineInputAttributes();
+        $this->refineInputAttributes();
 
-        return $this->_createInput();
+        return $this->createInput();
     }
 
-    private function _singleCheckboxRadio($type, $default, $attributes)
+    private function singleCheckboxRadio($type, $default, $attributes)
     {
         $this->setProperties($type, $default, $attributes);
-        $this->_refineInputAttributes();
+        $this->refineInputAttributes();
 
         $this->attributes['value'] = ! empty($attributes['value']) ? $attributes['value'] : '1';
 
         $this->attributes = array_merge($this->attributes, $this->getSelectedAttribute($this->attributes));
 
-        return $this->_createInput();
+        return $this->createInput();
     }
 
     /**
@@ -841,12 +817,12 @@ class HtmlElement
      *
      * @return string html
      */
-    private function _createInput()
+    protected function createInput()
     {
         $html = $this->addLabel();
         $html .= '<input' . $this->attributes() . '/>';
 
-        return $this->_publish($html);
+        return $this->publish($html);
     }
 
     /**
@@ -855,9 +831,9 @@ class HtmlElement
      * @param string $element
      * @return string
      */
-    private function _publish($element)
+    private function publish($element)
     {
-        return $this->_refinePublish($element);
+        return $this->refinePublish($element);
     }
 
     /**
@@ -866,7 +842,7 @@ class HtmlElement
      * @param string $element
      * @return string
      */
-    private function _refinePublish($element)
+    private function refinePublish($element)
     {
         $html = '';
         if (! empty($this->attributes[$this->config['BEFORE']]))
@@ -947,17 +923,17 @@ class HtmlElement
      * @param array $attributes
      * @param array $options
      */
-    private function setProperties($type, $default, array $attributes, array $options = [])
+    public function setProperties($type, $default, array $attributes, array $options = [])
     {
         $this->type = $type ?: 'text';
         $this->default = $default;
         $this->attributes = $attributes;
-        $this->_refineAttribute();
+        $this->refineAttribute();
 
         $this->setOptions($options);
     }
 
-    private function _refineAttribute()
+    private function refineAttribute()
     {
         $attributes = [];
         foreach ($this->attributes as $key => $val) {
@@ -974,7 +950,7 @@ class HtmlElement
      * Useful for making input fields.
      * name attribute was added to keep following order: type, name, value.
      */
-    private function _refineInputAttributes()
+    protected function refineInputAttributes()
     {
         $this->attributes = array_merge([
             'type' => $this->type,
@@ -990,7 +966,7 @@ class HtmlElement
      */
     private function attributes()
     {
-        $attributes = $this->_getRefinedAttributes();
+        $attributes = $this->getRefinedAttributes();
 
         return $this->toString($attributes);
     }
@@ -1000,7 +976,7 @@ class HtmlElement
      *
      * @return array: $attributes
      */
-    private function _getRefinedAttributes()
+    private function getRefinedAttributes()
     {
         $attributes = $this->attributes;
         $attributes = $this->onlyNonEmpty($attributes);
@@ -1138,6 +1114,12 @@ class HtmlElement
 
         return $data;
     }
+
+
+        public function setAttribute(string $string, string $name)
+{
+}
+
 
     /**
      * Filter all non string value from given array.
@@ -1296,61 +1278,6 @@ class HtmlElement
         'OPTION_BEFORE' => '_option_before', // hard coded on OptionsElement
         'OPTION_AFTER' => '_option_after', // hard coded on OptionsElement
         'DISABLE_ESCAPE' => '_disable_escape',
-    ];
-
-    /**
-     * Valid html5 input type.
-     * Anything other than that is considered as tag.
-     *
-     * @var array
-     */
-    protected $inputTypes = [
-        'button',
-        'checkbox',
-        'color',
-        'date',
-        'datetime',
-        'datetime-local',
-        'email',
-        'file',
-        'hidden',
-        'image',
-        'month',
-        'number',
-        'password',
-        'radio',
-        'range',
-        'reset',
-        'search',
-        'submit',
-        'tel',
-        'text',
-        'time',
-        'url',
-        'week',
-    ];
-
-    /**
-     * Attributes configurations.
-     *
-     * @var array
-     */
-    protected $attributesConfig = [
-        'value' => [
-            '_escape_function' => 'esc_attr',
-        ],
-        'id' => [
-            '_escape_function' => 'esc_attr',
-        ],
-        'class' => [
-            '_escape_function' => 'esc_attr',
-        ],
-        'src' => [
-            '_escape_function' => 'esc_url',
-        ],
-        'href' => [
-            '_escape_function' => 'esc_url',
-        ],
     ];
 }
 

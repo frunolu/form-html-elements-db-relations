@@ -7,10 +7,20 @@ namespace App\HtmlElement;
  *
  * Represents a <div> element in HTML code.
  */
-class DivElement extends HtmlElement
+class DivElement extends FormElement
 {
     public function __construct()
     {
-        parent::__construct('div');
+        parent::__construct();
+    }
+
+    /**
+     * Ends a group for form elements.
+     *
+     * @return string : HTML
+     */
+    protected function endGroup(): string
+    {
+        return '</div>';
     }
 }
