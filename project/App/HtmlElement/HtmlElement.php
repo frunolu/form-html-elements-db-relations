@@ -5,6 +5,11 @@ use Exception;
 
 class HtmlElement
 {
+    public function setAttribute()
+    {
+
+    }
+
     /**
      * Generate meta tag.
      *
@@ -269,7 +274,7 @@ class HtmlElement
 
         if (! in_array($this->type, [
             'select',
-            'multiselect'
+            'multiselect',
         ])) {
             $attributes = $this->_getRefinedAttributes();
         }
@@ -291,7 +296,7 @@ class HtmlElement
     {
         $attributes = $this->removeKeys($option, [
             'type',
-            'label'
+            'label',
         ]);
 
         return $this->toString($attributes);
@@ -313,7 +318,7 @@ class HtmlElement
 
             if (in_array($this->type, [
                     'radio',
-                    'checkboxList'
+                    'checkboxList',
                 ]) && $key == 'id' && $val) {
                 $attributes[$key] = "{$val}_{$this->optionCount}";
             }
@@ -321,7 +326,7 @@ class HtmlElement
 
         $attributes = $this->removeKeys($attributes, [
             'value',
-            'label'
+            'label',
         ]);
 
         return $attributes;
@@ -357,7 +362,7 @@ class HtmlElement
 
         if ($this->default === true) {
             return [
-                $key => $key
+                $key => $key,
             ];
         }
 
@@ -367,11 +372,11 @@ class HtmlElement
 
         if (is_array($this->default)) {
             return in_array($option['value'], $this->default) ? [
-                $key => $key
+                $key => $key,
             ] : [];
         } else {
             return $this->default == $option['value'] ? [
-                $key => $key
+                $key => $key,
             ] : [];
         }
 
@@ -424,11 +429,11 @@ class HtmlElement
     {
         $option = $this->addKeys($option, [
             'value',
-            'label'
+            'label',
         ]);
         $optionRefined = $this->removeKeys($option, [
             '_option_before',
-            '_option_after'
+            '_option_after',
         ]);
 
         return $this->_optionEnclose($option, 'before') . $this->callMethod('Single', $optionRefined) . $this->_optionEnclose($option, 'after');
@@ -464,7 +469,7 @@ class HtmlElement
     protected function groupStart(array $option)
     {
         $option = $this->addKeys($option, [
-            'label'
+            'label',
         ]);
 
         return $this->callMethod('GroupStart', $option);
@@ -894,14 +899,14 @@ class HtmlElement
 
             if (isset($this->attributes['id']) && ! in_array($this->type, [
                     'radio',
-                    'checkboxList'
+                    'checkboxList',
                 ])) {
                 $attr['for'] = $this->attributes['id'];
             }
 
             return static::_build('label', [
                 $default,
-                $attr
+                $attr,
             ]);
         }
 
@@ -928,7 +933,7 @@ class HtmlElement
 
         return [
             $first,
-            $args
+            $args,
         ];
     }
 
@@ -974,7 +979,7 @@ class HtmlElement
         $this->attributes = array_merge([
             'type' => $this->type,
             'name' => null,
-            'value' => $this->default
+            'value' => $this->default,
         ], $this->attributes);
     }
 
@@ -1181,7 +1186,7 @@ class HtmlElement
     {
         if (in_array(gettype($data), [
             'array',
-            'object'
+            'object',
         ])) {
             return false;
         }
@@ -1290,7 +1295,7 @@ class HtmlElement
         'ENCLOSE' => '_enclose',
         'OPTION_BEFORE' => '_option_before', // hard coded on OptionsElement
         'OPTION_AFTER' => '_option_after', // hard coded on OptionsElement
-        'DISABLE_ESCAPE' => '_disable_escape'
+        'DISABLE_ESCAPE' => '_disable_escape',
     ];
 
     /**
@@ -1322,7 +1327,7 @@ class HtmlElement
         'text',
         'time',
         'url',
-        'week'
+        'week',
     ];
 
     /**
@@ -1332,20 +1337,20 @@ class HtmlElement
      */
     protected $attributesConfig = [
         'value' => [
-            '_escape_function' => 'esc_attr'
+            '_escape_function' => 'esc_attr',
         ],
         'id' => [
-            '_escape_function' => 'esc_attr'
+            '_escape_function' => 'esc_attr',
         ],
         'class' => [
-            '_escape_function' => 'esc_attr'
+            '_escape_function' => 'esc_attr',
         ],
         'src' => [
-            '_escape_function' => 'esc_url'
+            '_escape_function' => 'esc_url',
         ],
         'href' => [
-            '_escape_function' => 'esc_url'
-        ]
+            '_escape_function' => 'esc_url',
+        ],
     ];
 }
 
