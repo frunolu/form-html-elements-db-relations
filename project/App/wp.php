@@ -1,7 +1,7 @@
 <?php
 /**
  * WordPress function for non WP users.
- * 
+ *
  * @author Khaled Hossain
  */
 

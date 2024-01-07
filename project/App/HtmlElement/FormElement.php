@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace App\HtmlElement;
 
-use App\HtmlElement\AElement;
-use App\HtmlElement\DivElement;
-use App\HtmlElement\FormElement;
-use App\HtmlElement\ImageElement;
-use App\HtmlElement\InputElement;
-use App\HtmlElement\SelectElement;
 use Exception;
 
 

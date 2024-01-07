@@ -6,7 +6,8 @@ class SelectElement extends HtmlElement
 {
     private const TAG_NAME = 'select';
 
-    protected array $options = [];
+    public $options = [];
+    private $tagName;
 
     public function __construct()
     {

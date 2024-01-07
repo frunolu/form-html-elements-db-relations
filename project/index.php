@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
+require_once 'App/HtmlElement/HtmlElement.php';
+require_once 'App/HtmlElement/FormElement.php';
 echo "hello";
-
 
 use App\HtmlElement\FormElement;
 
