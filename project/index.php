@@ -1,10 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once 'App/HtmlElement/HtmlElement.php';
-require_once 'App/HtmlElement/FormElement.php';
-require_once 'App/HtmlElement/InputElement.php';
-require_once 'App/HtmlElement/ImageElement.php';
+
+require_once 'vendor/autoload.php';
 
 use App\HtmlElement\FormElement;
 use App\HtmlElement\ImageElement;

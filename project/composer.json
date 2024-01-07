@@ -1,31 +1,36 @@
 {
-    "name": "frunolu/html",
-    "type": "library",
-    "description": "PHP class for html form builder",
-    "keywords": ["html", "form"],
-    "homepage": "https://github.com/frunolu/form-html-elements-relations",
-    "license": "MIT",
-    "authors": [{
-        "name": "Lukas Fruno"
-    }],
-    "require": {
-        "php": ">=8.0.0",
-        "squizlabs/php_codesniffer": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": { "App\\": "app/" }
-    },
-
-
-    "config": {
-        "allow-plugins": {
-            "symfony/thanks": true
-        }
-    },
-    "minimum-stability": "dev"
+  "name": "frunolu/html",
+  "type": "library",
+  "description": "PHP class for html form builder",
+  "keywords": [
+    "html",
+    "form"
+  ],
+  "homepage": "https://github.com/frunolu/form-html-elements-relations",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lukas Fruno"
+    }
+  ],
+  "require": {
+    "php": ">=8.0.0",
+    "squizlabs/php_codesniffer": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "App"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\": "App"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/thanks": true
+    }
+  },
+  "minimum-stability": "dev"
 }

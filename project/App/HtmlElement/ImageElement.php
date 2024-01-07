@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\HtmlElement;
 
-use almeyda\fileversion\src\FileVersion;
-
 class ImageElement extends HtmlElement
 {
 
