@@ -147,7 +147,7 @@ class HtmlElement
      *
      * @return string : html multiselect
      */
-    protected function multiselect($default = [], array $attributes = [], array $options = [])
+    public function multiselect($default = [], array $attributes = [], array $options = []): string
     {
         $this->setProperties('multiselect', $default, $attributes, $options);
 
@@ -169,7 +169,7 @@ class HtmlElement
      *
      * @return string : html radio
      */
-    protected function radioList($default = null, array $attributes = [], array $options = [])
+    protected function radioList($default = null, array $attributes = [], array $options = []): string
     {
         $this->setProperties('radio', $default, $attributes, $options);
 
@@ -323,6 +323,8 @@ class HtmlElement
             'value',
             'label'
         ]);
+
+        return $attributes;
     }
 
     /**
